@@ -40,6 +40,7 @@ def interpret(code, ccell, cells):
             
             case '.':
                 sys.stdout.write(chr(cells[ccell]))
+                # I stole this line bc I was having problems with printing some of the goofy chars
             
             case '[':
                 if cells[ccell] > 0:
@@ -47,9 +48,13 @@ def interpret(code, ccell, cells):
             
             case ']':
                 if cells[ccell] == 0:
+                # So I think this is wrong—the cell I need to check is 
+                # the one the loop started in iirc. Which shouldn't be hard to
+                # implement, I just don't remember how BF works
                     loop = ''
                 else:
                     ccell, cells = interpret(loop, ccell, cells)
+                    # This could and probably will lead to a stack overflow but idk what else to do
 
             case ',':
                 cells[ccell] = input()
